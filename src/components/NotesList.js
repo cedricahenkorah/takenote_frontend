@@ -16,11 +16,14 @@ const NotesList = ({ showModal, setShowModal }) => {
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const response = await fetch("/api/notes", {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const response = await fetch(
+        "https://takenote-server.onrender.com/api/notes",
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       const json = await response.json();
 
       if (response.ok) {

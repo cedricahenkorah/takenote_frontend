@@ -15,12 +15,15 @@ const NoteItem = ({ note }) => {
       return;
     }
 
-    const response = await fetch(`/api/notes/${note._id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
+    const response = await fetch(
+      `https://takenote-server.onrender.com/api/notes/${note._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
 
     const json = await response.json();
 

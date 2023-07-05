@@ -28,14 +28,17 @@ const AddNote = ({ showModal, setShowModal }) => {
 
     const note = { title, label, body };
 
-    const response = await fetch("/api/notes", {
-      method: "POST",
-      body: JSON.stringify(note),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
+    const response = await fetch(
+      "https://takenote-server.onrender.com/api/notes",
+      {
+        method: "POST",
+        body: JSON.stringify(note),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
 
     const json = await response.json();
 
@@ -84,17 +87,20 @@ const AddNote = ({ showModal, setShowModal }) => {
                       )}
 
                       <label>Title</label>
-                      <input
-                        type="text"
-                        placeholder="title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        className={
-                          emptyFields.includes("title")
-                            ? "w-full bg-gray-200 mb-3 lg:mb-5 mt-2 p-2 lg:p-3 rounded-md border border-red-500 focus:ring-offset-4 focus:ring-2 focus:ring-red-500"
-                            : "w-full bg-gray-200 mb-3 lg:mb-5 mt-2 p-2 lg:p-3 rounded-md border border-gray-200 focus:ring-offset-4 focus:ring-2"
-                        }
-                      />
+                      <div className="flex items-center gap-x-1">
+                        <div className="text-3xl">🎙</div>
+                        <input
+                          type="text"
+                          placeholder="title"
+                          value={title}
+                          onChange={(e) => setTitle(e.target.value)}
+                          className={
+                            emptyFields.includes("title")
+                              ? "w-full bg-gray-200 mb-3 lg:mb-5 mt-2 p-2 lg:p-3 rounded-md border border-red-500 focus:ring-offset-4 focus:ring-2 focus:ring-red-500"
+                              : "w-full bg-gray-200 mb-3 lg:mb-5 mt-2 p-2 lg:p-3 rounded-md border border-gray-200 focus:ring-offset-4 focus:ring-2"
+                          }
+                        />
+                      </div>
 
                       <label>Label</label>
                       <input
