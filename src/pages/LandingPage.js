@@ -1,6 +1,7 @@
 import React from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
 import Navbar from "../components/Navbar";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -21,10 +22,12 @@ const LandingPage = () => {
           </p>
 
           <div className="pt-14 flex justify-center text-white">
-            <div className="bg-black w-48 flex items-center justify-between py-3 px-6 rounded-lg">
-              <p className="font-semibold tracking-wide">Get started</p>
-              <BsArrowRightCircle />
-            </div>
+            <Link to="/signup">
+              <div className="bg-black w-48 flex items-center justify-between py-3 px-6 rounded-lg">
+                <p className="font-semibold tracking-wide">Get started</p>
+                <BsArrowRightCircle />
+              </div>
+            </Link>
           </div>
 
           <div className="flex justify-center h-[350px] xl:h-[500px]">

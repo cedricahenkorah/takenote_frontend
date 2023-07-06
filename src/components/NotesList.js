@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdPostAdd } from "react-icons/md";
 import { LuLogOut } from "react-icons/lu";
 import { FiMenu } from "react-icons/fi";
-import { FcOpenedFolder } from "react-icons/fc";
+import { FcOpenedFolder, FcHome } from "react-icons/fc";
 import { Tooltip, Dropdown } from "flowbite-react";
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
@@ -80,6 +80,12 @@ const NotesList = ({ showModal, setShowModal }) => {
                   <MdPostAdd size={25} />
                   <p>Add note</p>
                 </Dropdown.Header>
+                <Link to="/">
+                  <Dropdown.Item className="flex items-center gap-x-2">
+                    <FcHome size={25} />
+                    <p>Home</p>
+                  </Dropdown.Item>
+                </Link>
                 <Dropdown.Item
                   className="flex items-center gap-x-2"
                   onClick={handleLogout}
@@ -98,6 +104,40 @@ const NotesList = ({ showModal, setShowModal }) => {
         </div>
       ) : notes && notes.length === 0 ? (
         <div className="lg:w-4/5 w-full p-2 lg:p-5 bg-white rounded-xl border-2 shadow-xl">
+          <div className="flex items-center justify-between">
+            <div className="flex lg:hidden">
+              <FcOpenedFolder size={25} onClick={() => setShowModal(true)} />
+            </div>
+
+            <div className="md:hidden flex">
+              <Dropdown
+                arrowIcon={false}
+                inline={true}
+                label={<FiMenu size={25} />}
+              >
+                <Dropdown.Header
+                  className="flex items-center gap-x-2"
+                  onClick={() => setShowModal(true)}
+                >
+                  <MdPostAdd size={25} />
+                  <p>Add note</p>
+                </Dropdown.Header>
+                <Link to="/">
+                  <Dropdown.Item className="flex items-center gap-x-2">
+                    <FcHome size={25} />
+                    <p>Home</p>
+                  </Dropdown.Item>
+                </Link>
+                <Dropdown.Item
+                  className="flex items-center gap-x-2"
+                  onClick={handleLogout}
+                >
+                  <LuLogOut size={20} color="red" />
+                  <p>Logout</p>
+                </Dropdown.Item>
+              </Dropdown>
+            </div>
+          </div>
           <div className="flex justify-center items-center h-full">
             <div className="flex flex-col">
               <img

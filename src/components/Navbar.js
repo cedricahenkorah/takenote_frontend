@@ -35,12 +35,12 @@ const Navbar = () => {
       {/* dropdown */}
       <div className="md:hidden flex">
         <Dropdown arrowIcon={false} inline={true} label={<FiMenu size={30} />}>
-          <Dropdown.Header>
-            <Link to="/login">Login</Link>
-          </Dropdown.Header>
-          <Dropdown.Item>
-            <Link to="/signup">Create account</Link>
-          </Dropdown.Item>
+          <Link to="/login">
+            <Dropdown.Header>Login</Dropdown.Header>
+          </Link>
+          <Link to="/signup">
+            <Dropdown.Item>Create account</Dropdown.Item>
+          </Link>
         </Dropdown>
       </div>
     </nav>
