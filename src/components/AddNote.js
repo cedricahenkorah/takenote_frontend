@@ -88,7 +88,7 @@ const AddNote = ({ showModal, setShowModal }) => {
 
                       <label>Title</label>
                       <div className="flex items-center gap-x-1">
-                        <div className="text-3xl">🎙</div>
+                        {/* <div className="text-3xl">🎙</div> */}
                         <input
                           type="text"
                           placeholder="title"

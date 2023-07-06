@@ -73,12 +73,18 @@ const NotesList = ({ showModal, setShowModal }) => {
                 inline={true}
                 label={<FiMenu size={25} />}
               >
-                <Dropdown.Header className="flex items-center gap-x-2">
-                  <MdPostAdd size={25} onClick={() => setShowModal(true)} />
+                <Dropdown.Header
+                  className="flex items-center gap-x-2"
+                  onClick={() => setShowModal(true)}
+                >
+                  <MdPostAdd size={25} />
                   <p>Add note</p>
                 </Dropdown.Header>
-                <Dropdown.Item className="flex items-center gap-x-2">
-                  <LuLogOut size={20} color="red" onClick={handleLogout} />
+                <Dropdown.Item
+                  className="flex items-center gap-x-2"
+                  onClick={handleLogout}
+                >
+                  <LuLogOut size={20} color="red" />
                   <p>Logout</p>
                 </Dropdown.Item>
               </Dropdown>

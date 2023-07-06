@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { signup, isLoading, error } = useSignup();
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate("/"); // Go back to the previous page
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,9 +25,12 @@ const Signup = () => {
       <div className="flex justify-center items-center w-full text-white px-5 lg:px-0">
         <div className="bg-white rounded-2xl shadow-lg text-black">
           <div className="px-10 lg:px-20 py-8 lg:py-10">
-            <h1 className="text-lg lg:text-2xl font-bold tracking-wide">
+            <IoMdArrowRoundBack size={30} onClick={goBack} />
+
+            <h1 className="text-lg lg:text-2xl font-bold tracking-wide mt-3">
               Sign up to take<span className="text-amber-400">Note</span>
             </h1>
+
             <p className="text-gray-400 text-sm lg:text-base mt-1">
               Create an account to start organizing your notes
             </p>

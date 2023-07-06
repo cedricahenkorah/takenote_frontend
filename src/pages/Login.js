@@ -9,29 +9,27 @@ const Login = () => {
   const { login, isLoading, error } = useLogin();
   const navigate = useNavigate();
 
+  const goBack = () => {
+    navigate("/"); // Go back to the previous page
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     await login(username, password);
   };
 
-  const goBack = () => {
-    navigate("/"); // Go back to the previous page
-  };
-
   return (
     <div className="min-h-screen w-full flex bg-slate-50">
-      <div className="p-10">
-        {" "}
-        <IoMdArrowRoundBack size={30} onClick={goBack} />
-      </div>
-
       <div className="flex justify-center items-center w-full text-white px-5 lg:px-0">
         <div className="bg-white rounded-2xl shadow-lg text-black">
           <div className="px-10 lg:px-20 py-8 lg:py-10">
-            <h1 className="text-lg lg:text-2xl font-bold tracking-wide">
+            <IoMdArrowRoundBack size={30} onClick={goBack} />
+
+            <h1 className="text-lg lg:text-2xl font-bold tracking-wide mt-3">
               Sign in to take<span className="text-amber-400">Note</span>
             </h1>
+
             <p className="text-gray-400 text-sm lg:text-base mt-1">
               Welcome back! Please enter your details to dive back in
             </p>
@@ -65,7 +63,7 @@ const Login = () => {
                 </button>
               ) : (
                 <button className="w-full bg-black text-white lg:font-semibold py-1 lg:py-2 rounded-full mt-3">
-                  Hold on we're logging you back in...
+                  Hold on...
                 </button>
               )}
             </form>
