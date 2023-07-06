@@ -7,6 +7,7 @@ import {
   LuLogOut,
 } from "react-icons/lu";
 import { useLogout } from "../hooks/useLogout";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ showModal, setShowModal }) => {
   const { logout } = useLogout();
@@ -16,14 +17,16 @@ const Sidebar = ({ showModal, setShowModal }) => {
   };
 
   return (
-    <div className="w-1/5 lg:flex flex-col hidden bg-white rounded-xl border-2 shadow-xl p-5">
+    <div className="w-1/5 lg:flex flex-col hidden bg-white rounded-xl shadow-xl p-5">
       {/* logo */}
-      <div className="flex items-center gap-x-2 pb-5 border-b">
-        <FcOpenedFolder size={30} />
-        <h1 className="text-lg font-bold tracking-wider">
-          take<span className="text-amber-400">Note</span>
-        </h1>
-      </div>
+      <Link to="/">
+        <div className="flex items-center gap-x-2 pb-5 border-b">
+          <FcOpenedFolder size={30} />
+          <h1 className="text-lg font-bold tracking-wider">
+            take<span className="text-amber-400">Note</span>
+          </h1>
+        </div>
+      </Link>
 
       {/* navigation */}
       <div className="mt-5 h-full flex flex-col justify-between">
@@ -55,7 +58,10 @@ const Sidebar = ({ showModal, setShowModal }) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-x-2 p-2" onClick={handleLogout}>
+        <div
+          className="flex items-center gap-x-2 p-2 cursor-pointer"
+          onClick={handleLogout}
+        >
           <LuLogOut size={20} /> <p className="font-semibold">Logout</p>
         </div>
       </div>

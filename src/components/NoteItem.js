@@ -37,7 +37,7 @@ const NoteItem = ({ note }) => {
       <div className="flex flex-col gap-y-2">
         <div className="flex justify-between items-center">
           <Link key={note._id} to={`/dashboard/${note._id}`}>
-            <h1 className="font-semibold tracking-wide text-lg">
+            <h1 className="font-semibold tracking-wide text-base lg:text-lg">
               {note.title}
             </h1>
           </Link>
@@ -55,18 +55,18 @@ const NoteItem = ({ note }) => {
       </div>
 
       <Link
-        className="flex flex-col justify-between h-full mt-2"
+        className="flex flex-col justify-end lg:justify-between h-full mt-2"
         key={note._id}
         to={`/dashboard/${note._id}`}
       >
-        <p className="text-gray-500 line-clamp-3">{note.body}</p>
+        <p className="hidden lg:flex text-gray-500 line-clamp-3">{note.body}</p>
 
-        <div className="flex justify-between">
+        <div className="flex flex-col lg:flex-row lg:justify-between">
           <p className="text-gray-400 text-sm">
             {formatDistanceToNow(new Date(note.createdAt), { addSuffix: true })}
           </p>
 
-          <p className="text-amber-400 font-semibold">#{note.label}</p>
+          <p className="text-gray-400 font-semibold text-sm">#{note.label}</p>
         </div>
       </Link>
     </div>

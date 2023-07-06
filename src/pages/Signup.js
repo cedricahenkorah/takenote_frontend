@@ -15,7 +15,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex bg-gradient-to-b from-slate-200 to-slate-100">
+    <div className="min-h-screen w-full flex bg-slate-50">
       <div className="flex justify-center items-center w-full text-white px-5 lg:px-0">
         <div className="bg-white rounded-2xl shadow-lg text-black">
           <div className="px-10 lg:px-20 py-8 lg:py-10">

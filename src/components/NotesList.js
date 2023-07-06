@@ -1,21 +1,26 @@
-import React, { useEffect } from "react";
-import { FcOpenedFolder } from "react-icons/fc";
+import React, { useEffect, useState } from "react";
 import { MdPostAdd } from "react-icons/md";
 import { LuLogOut } from "react-icons/lu";
-import { Tooltip } from "flowbite-react";
+import { FiMenu } from "react-icons/fi";
+import { FcOpenedFolder } from "react-icons/fc";
+import { Tooltip, Dropdown } from "flowbite-react";
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
 import { useNotesContext } from "../hooks/useNotesContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
+import { Link } from "react-router-dom";
 
 const NotesList = ({ showModal, setShowModal }) => {
   const { notes, dispatch } = useNotesContext();
   const { user } = useAuthContext();
   const { logout } = useLogout();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchNotes = async () => {
+      setIsLoading(true);
+
       const response = await fetch(
         "https://takenote-server.onrender.com/api/notes",
         {
@@ -29,6 +34,8 @@ const NotesList = ({ showModal, setShowModal }) => {
       if (response.ok) {
         dispatch({ type: "SET_NOTES", payload: json });
       }
+
+      setIsLoading(false);
     };
 
     if (user) {
@@ -42,41 +49,71 @@ const NotesList = ({ showModal, setShowModal }) => {
 
   return (
     <>
-      {notes && notes.length > 0 ? (
+      {notes && !isLoading && notes.length > 0 ? (
         <div className="lg:w-4/5 w-full p-2 lg:p-5 flex flex-col">
-          <div className="flex justify-between">
-            <h1 className="text-xl lg:text-2xl font-semibold text-gray-500">
-              hi there,{" "}
-              {user && <span className="text-black">{user.username}</span>}
+          <div className="flex items-center justify-between">
+            {/* <div className="flex items-center gap-x-2">
+              <FcOpenedFolder size={25} />
+              <h1 className="text-md lg:text-lg font-bold tracking-wider">
+                take<span className="text-amber-400">Note</span>
+              </h1>
+            </div> */}
+
+            <div className="flex lg:hidden">
+              <FcOpenedFolder size={25} onClick={() => setShowModal(true)} />
+            </div>
+
+            <h1 className="text-md lg:text-2xl font-semibold text-gray-500">
+              {user && <p className="text-black">hi, {user.username}</p>}
             </h1>
 
-            <div className="flex lg:hidden gap-x-3">
-              <Tooltip content="Add a note">
-                <MdPostAdd size={25} onClick={() => setShowModal(true)} />
-              </Tooltip>
-
-              <Tooltip content="Logout">
-                <LuLogOut size={20} color="red" onClick={handleLogout} />
-              </Tooltip>
+            <div className="md:hidden flex">
+              <Dropdown
+                arrowIcon={false}
+                inline={true}
+                label={<FiMenu size={25} />}
+              >
+                <Dropdown.Header className="flex items-center gap-x-2">
+                  <MdPostAdd size={25} onClick={() => setShowModal(true)} />
+                  <p>Add note</p>
+                </Dropdown.Header>
+                <Dropdown.Item className="flex items-center gap-x-2">
+                  <LuLogOut size={20} color="red" onClick={handleLogout} />
+                  <p>Logout</p>
+                </Dropdown.Item>
+              </Dropdown>
             </div>
           </div>
 
-          <div className="mt-5 grid lg:grid-cols-4 grid-cols-1 gap-3">
+          <div className="mt-5 grid lg:grid-cols-4 grid-cols-2 gap-3">
             {notes &&
               notes.map((note) => <NoteItem key={note._id} note={note} />)}
           </div>
         </div>
-      ) : (
+      ) : notes && notes.length === 0 ? (
         <div className="lg:w-4/5 w-full p-2 lg:p-5 bg-white rounded-xl border-2 shadow-xl">
-          <div className="flex justify-center mt-10 lg:mt-10">
-            <img
-              src="/assets/man_sitting.png"
-              alt="welcome"
-              className="h-[250px] lg:h-[300px] w-[250px] lg:w-[300px]"
-            />
+          <div className="flex justify-center items-center h-full">
+            <div className="flex flex-col">
+              <img
+                src="/assets/man_sitting.png"
+                alt="welcome"
+                className="h-[250px] lg:h-[300px] w-[250px] lg:w-[300px]"
+              />
+
+              <h1 className="text-center text-lg font-semibold">
+                It's a bit lonely in here😅, take a{" "}
+                <span
+                  className="text-blue-500 underline underline-offset-4 cursor-pointer"
+                  onClick={() => setShowModal(true)}
+                >
+                  {" "}
+                  note
+                </span>
+              </h1>
+            </div>
           </div>
 
-          <div className="mt-5 flex justify-center">
+          {/* <div className="mt-5 flex justify-center">
             <div className="flex flex-col">
               <div className="flex items-center gap-x-2">
                 <h1 className="font-bold text-xl lg:text-3xl">
@@ -120,6 +157,21 @@ const NotesList = ({ showModal, setShowModal }) => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div> */}
+        </div>
+      ) : (
+        <div className="lg:w-4/5 w-full h-full p-2 lg:p-5 flex flex-col">
+          <div className="flex justify-center items-center h-full">
+            <div className="flex flex-col gap-y-3">
+              <img
+                src="/assets/loading.png"
+                alt="loading"
+                className="h-64 w-64"
+              />
+              <p className="text-center text-lg font-semibold">
+                hang on tight...😁
+              </p>
             </div>
           </div>
         </div>

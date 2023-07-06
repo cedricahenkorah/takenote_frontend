@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, isLoading, error } = useLogin();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,8 +15,17 @@ const Login = () => {
     await login(username, password);
   };
 
+  const goBack = () => {
+    navigate("/"); // Go back to the previous page
+  };
+
   return (
-    <div className="min-h-screen w-full flex bg-gradient-to-b from-slate-200 to-slate-100">
+    <div className="min-h-screen w-full flex bg-slate-50">
+      <div className="p-10">
+        {" "}
+        <IoMdArrowRoundBack size={30} onClick={goBack} />
+      </div>
+
       <div className="flex justify-center items-center w-full text-white px-5 lg:px-0">
         <div className="bg-white rounded-2xl shadow-lg text-black">
           <div className="px-10 lg:px-20 py-8 lg:py-10">

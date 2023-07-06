@@ -6,7 +6,7 @@ const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="min-h-screen w-full flex bg-gradient-to-b from-slate-200 to-slate-100">
+    <div className="min-h-screen w-full flex lg:bg-slate-50 bg-white">
       <div className="flex-grow flex p-5 gap-x-5 w-full">
         {/* sidebar */}
         <Sidebar showModal={showModal} setShowModal={setShowModal} />
