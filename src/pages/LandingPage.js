@@ -9,7 +9,7 @@ const LandingPage = () => {
       {/* navbar */}
       <Navbar />
 
-      <div className="flex justify-center pt-32 lg:pt-8 xl:pt-24 px-5 lg:px-0">
+      <div className="flex justify-center pt-24 lg:pt-8 xl:pt-24 px-5 lg:px-0">
         <div className="">
           <h1 className="font-bold text-xl lg:text-3xl xl:text-4xl mb-4 text-center">
             Take <span className="text-amber-400">Notes.</span> Stay Organized.
